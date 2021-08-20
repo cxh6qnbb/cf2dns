@@ -1,5 +1,5 @@
 如果你使用的华为云 那么请移步 https://github.com/Arronlong/py_scripts/tree/master/scripts/cf2dns
-感谢小伙伴的辛勤付出 搞定了华为云这个世纪难题1
+感谢小伙伴的辛勤付出 搞定了华为云这个世纪难
 
 ### 功能介绍
 
