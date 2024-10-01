@@ -1,28 +1,21 @@
-name: 'GitHub Actions CloudFlare2DNSPod Bot'
+# .github/workflows/read_secret.yml
+name: Read Secret Example
 
 on:
   push:
-    branches: 
-      - master
-  schedule:
-    - cron: '*/16 * * * *'
+    branches:
+      - main
 
 jobs:
-  build:
+  read_secret:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 'Checkout'
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: 'Set up Python'
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
-      - name: 'Install dependencies'
-        run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: 'run cf2dns'
+
+      - name: Read secret and set MY_VAR
         env:
-          KEY: ${{ secrets.KEY }}
-          DOMAINS: ${{ secrets.DOMAINS }}
-          SECRETID: ${{ secrets.SECRETID }}
-          SECRETKEY: ${{ secrets.SECRETKEY }}
-        run: python cf2dns_actions.py
+          MY_VAR: ${{ secrets.KEY }}
+        run: |
+          echo "MY_VAR value is: $MY_VAR"
