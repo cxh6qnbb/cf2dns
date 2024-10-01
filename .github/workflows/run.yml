@@ -1,4 +1,4 @@
-name: Fetch License
+name: Fetch License1
 
 on:
   push:
