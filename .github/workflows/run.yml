@@ -2,9 +2,9 @@
 name: Fetch License
 
 on:
-  push:
+  push:  # 检查每次推送
     branches:
-      - main
+      - main  # 只在 main 分支
 
 jobs:
   fetch_license:
@@ -19,4 +19,3 @@ jobs:
           LICENSE_KEY: ${{ secrets.KEY }}
         run: |
           curl -s "https://api.hostmonit.com/get_license?license=${LICENSE_KEY}"
-
