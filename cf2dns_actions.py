@@ -43,7 +43,7 @@ def get_optimization_ip():
     except Exception as e:
         print(traceback.print_exc())
         return None
-
+print(KEY)
 def changeDNS(line, s_info, c_info, domain, sub_domain, cloud):
     global AFFECT_NUM
     if line == "CM":
