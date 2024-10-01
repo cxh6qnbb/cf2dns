@@ -43,7 +43,7 @@ def get_optimization_ip():
     except Exception as e:
         print(traceback.print_exc())
         return None
-print(KEY)
+
 def changeDNS(line, s_info, c_info, domain, sub_domain, cloud):
     global AFFECT_NUM
     if line == "CM":
@@ -91,7 +91,7 @@ def changeDNS(line, s_info, c_info, domain, sub_domain, cloud):
                     continue
                 ret = cloud.change_record(domain, info["recordId"], sub_domain, cf_ip, "A", line, TTL)
                 if(DNS_SERVER != 1 or ret["code"] == 0):
-                    print("CHANGE DNS SUCCESS: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip )
+                    print("CHANGE DNS SUCCESS: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip + "KEY: " + KEY )
                 else:
                     print("CHANGE DNS ERROR: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip + "----MESSAGE: " + ret["message"] )
                 create_num += 1
