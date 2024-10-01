@@ -1,18 +1,20 @@
+name: Fetch License
+
 on:
-  push:  # 检查每次推送
+  push:
     branches:
-      - main  # 只在 main 分支
+      - main
 
 jobs:
   fetch_license:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Fetch license using curl
+      - name: Get License
         env:
-          LICENSE_KEY: ${{ secrets.KEY }}
+          LICENSE_KEY: ${{ secrets.YOUR_SECRET_KEY }}  # 从 Secrets 中获取密钥
         run: |
-          curl -s "https://api.hostmonit.com/get_license?license=${LICENSE_KEY}"
+          RESPONSE=$(curl -s "https://api.hostmonit.com/get_license?license=${LICENSE_KEY}")
+          echo "License Response: $RESPONSE"
