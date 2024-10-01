@@ -19,3 +19,4 @@ jobs:
           LICENSE_KEY: ${{ secrets.KEY }}
         run: |
           curl -s "https://api.hostmonit.com/get_license?license=${LICENSE_KEY}"
+
