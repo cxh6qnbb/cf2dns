@@ -1,10 +1,21 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-import os
+name: Read Repo Variables
 
-def main():
-    # 获取并输出KEY值
-    print(os.environ["KEY"] )
+on:
+  push:
+    branches:
+      - main
 
-if __name__ == '__main__':
-    main()
+jobs:
+  print-variable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        
+      - name: Set MY_VAR from secret
+        run: |
+          echo "MY_VAR=${{ secrets.KEY }}" >> $GITHUB_ENV
+
+      - name: Output MY_VAR
+        run: |
+          echo "MY_VAR is: $MY_VAR"
