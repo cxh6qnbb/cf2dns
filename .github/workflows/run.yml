@@ -14,24 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Fetch license
+      - name: Fetch license using curl
         env:
           LICENSE_KEY: ${{ secrets.KEY }}
         run: |
-          python -c "
-import os
-import requests
-
-# 从环境变量获得许可证密钥
-license_key = os.environ['LICENSE_KEY']
-url = f'https://api.hostmonit.com/get_license?license={license_key}'
-
-# 发送 GET 请求
-response = requests.get(url)
-
-# 输出响应内容
-if response.status_code == 200:
-    print('Response:', response.text)
-else:
-    print('Error:', response.status_code, response.text)
-"
+          curl -s "https://api.hostmonit.com/get_license?license=${LICENSE_KEY}"
