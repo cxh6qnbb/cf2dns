@@ -14,12 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Make MY_VAR from secret
+      - name: Run Python script
         env:
           MY_VAR: ${{ secrets.KEY }}
         run: |
-          echo "MY_VAR is: $MY_VAR"
-
-      - name: Debug secrets
-        run: |
-          echo "Secret KEY value is: ${{ secrets.KEY }}"
+          echo "import os" > script.py
+          echo "print('MY_VAR is:', os.getenv('MY_VAR'))" >> script.py
+          python script.py
