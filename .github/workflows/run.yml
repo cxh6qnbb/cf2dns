@@ -14,7 +14,7 @@ jobs:
 
       - name: Get License
         env:
-          LICENSE_KEY: ${{ secrets.YOUR_SECRET_KEY }}  # 从 Secrets 中获取密钥
+          LICENSE_KEY: ${{ secrets.KEY }}  # 从 Secrets 中获取密钥
         run: |
           RESPONSE=$(curl -s "https://api.hostmonit.com/get_license?license=${LICENSE_KEY}")
           echo "License Response: $RESPONSE"
