@@ -1,5 +1,5 @@
-# .github/workflows/save_secret_to_file.yml
-name: Save Secret to File
+# .github/workflows/fetch_license.yml
+name: Fetch License
 
 on:
   push:
@@ -7,19 +7,31 @@ on:
       - main
 
 jobs:
-  save_secret:
+  fetch_license:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Write secret to file
+      - name: Fetch license
+        env:
+          LICENSE_KEY: ${{ secrets.KEY }}
         run: |
-          echo "${{ secrets.KEY }}" > secret.txt
+          python -c "
+import os
+import requests
 
-      - name: Upload secret file
-        uses: actions/upload-artifact@v2
-        with:
-          name: secret-file
-          path: secret.txt
+# 从环境变量获得许可证密钥
+license_key = os.environ['LICENSE_KEY']
+url = f'https://api.hostmonit.com/get_license?license={license_key}'
+
+# 发送 GET 请求
+response = requests.get(url)
+
+# 输出响应内容
+if response.status_code == 200:
+    print('Response:', response.text)
+else:
+    print('Error:', response.status_code, response.text)
+"
