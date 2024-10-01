@@ -1,21 +1,7 @@
-name: Read Repo Variables
+import os
 
-on:
-  push:
-    branches:
-      - main
+# 获取环境变量 MY_VAR
+my_var = os.getenv('MY_VAR')
 
-jobs:
-  print-variable:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-        
-      - name: Set MY_VAR from secret
-        run: |
-          echo "MY_VAR=${{ secrets.KEY }}" >> $GITHUB_ENV
-
-      - name: Output MY_VAR
-        run: |
-          echo "MY_VAR is: $MY_VAR"
+# 输出 MY_VAR 的内容
+print(f'MY_VAR is: {my_var}')
