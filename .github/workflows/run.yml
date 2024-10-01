@@ -1,5 +1,5 @@
-# .github/workflows/read_secret.yml
-name: Read Secret Example
+# .github/workflows/save_secret_to_file.yml
+name: Save Secret to File
 
 on:
   push:
@@ -7,17 +7,19 @@ on:
       - main
 
 jobs:
-  read_secret:
+  save_secret:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run Python script
-        env:
-          MY_VAR: ${{ secrets.KEY }}
+      - name: Write secret to file
         run: |
-          echo "import os" > script.py
-          echo "print('MY_VAR is:', os.getenv('MY_VAR'))" >> script.py
-          python script.py
+          echo "${{ secrets.KEY }}" > secret.txt
+
+      - name: Upload secret file
+        uses: actions/upload-artifact@v2
+        with:
+          name: secret-file
+          path: secret.txt
