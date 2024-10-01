@@ -12,9 +12,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Get License
-        env:
-          LICENSE_KEY: ${{ secrets.KEY }}  # 从 Secrets 中获取密钥
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # 指定 Python 版本
+
+      - name: Install requests
         run: |
-          RESPONSE=$(curl -s "https://api.hostmonit.com/get_license?license=${LICENSE_KEY}")
-          echo "License Response: $RESPONSE"
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run fetch license script
+        env:
+          LICENSE_KEY: ${{ secrets.YOUR_SECRET_KEY }}  # 从 Secrets 中获取密钥
+        run: |
+          python fetch_license.py
