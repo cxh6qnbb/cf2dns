@@ -1,6 +1,3 @@
-# .github/workflows/fetch_license.yml
-name: Fetch License
-
 on:
   push:  # 检查每次推送
     branches:
