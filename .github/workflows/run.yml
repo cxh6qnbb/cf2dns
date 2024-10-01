@@ -14,8 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Read secret and set MY_VAR
+      - name: Make MY_VAR from secret
         env:
           MY_VAR: ${{ secrets.KEY }}
         run: |
-          echo "MY_VAR value is: $MY_VAR"
+          echo "MY_VAR is: $MY_VAR"
+
+      - name: Debug secrets
+        run: |
+          echo "Secret KEY value is: ${{ secrets.KEY }}"
